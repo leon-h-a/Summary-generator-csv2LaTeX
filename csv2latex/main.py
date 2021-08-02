@@ -1,4 +1,4 @@
-from coverter import Converter
+from csv2latex.coverter import Converter
 
 # Set LaTeX doc type
 # Set how headers are recognised and in what cell i.e. A$3
