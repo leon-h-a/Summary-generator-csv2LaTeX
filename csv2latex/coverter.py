@@ -6,6 +6,8 @@ class Converter:
     def __init__(self,
                  latex_doc_type):
         # csv
+        self.csv_filepath = None
+        self.csv_filename = None
         self.csv_data = None
 
         # LaTeX
@@ -21,8 +23,7 @@ class Converter:
         self.generate_tex_file()
 
     def load_csv(self):
-        # Use from utils.csv
-        raise NotImplemented
+        self.csv_filepath = csv.get_csv_filpath()
 
     def create_latex_doc(self):
         self.latex_doc = latex.create_latex_doc()
