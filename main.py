@@ -7,14 +7,14 @@ output_filepath = Path("C:/Users/Leon.hergesic.adamov/OneDrive/Dokumenti/knjige/
 # If the alias name is left empty, the bash alias will not be created
 bash_aliases_path = "C:/Users/Leon.hergesic.adamov/AppData/Local/Packages/CanonicalGroupLimited" \
                     ".UbuntuonWindows_79rhkp1fndgsc/LocalState/rootfs/home "
-alias_name = None
+alias_name = "tewss"
 
 # The script can automatically add .tex file alias to the .bash_aliases.
 # In that case, the <output_filepath> is the same path that the alias will be linked to
 # If you do not want to use this feature, set "alias" to None.
 bash_aliases = {
     "alias_path": bash_aliases_path,
-    "alias": "tew"
+    "alias": alias_name
 }
 
 conv = Converter(

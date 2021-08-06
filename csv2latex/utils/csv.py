@@ -7,7 +7,7 @@ from csv2latex.models.textBlock import TextBlock
 
 def get_csv_filepath():
     csv_files = list()
-    all_files = os.listdir('.\\input_file')
+    all_files = os.listdir(Path("input_file"))
 
     for file in all_files:
         if ".csv" in file:
