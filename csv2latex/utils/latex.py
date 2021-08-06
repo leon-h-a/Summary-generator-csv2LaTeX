@@ -1,4 +1,5 @@
 from pylatex import Document, Section, Command, NoEscape, NewPage, HugeText, NewLine
+import os
 
 
 def create_latex_doc():
@@ -25,5 +26,11 @@ def insert_paragraph(doc, textblock):
     doc.append(NewLine())
 
 
-def generate_tex_file(doc, path):
-    doc.generate_tex(path)
+def tex_dir_exists(path, filename):
+    if (path / filename).exists():
+        return True
+
+
+def generate_tex_file(doc, path, filename):
+    os.mkdir(path / filename)
+    doc.generate_tex(str(path/filename/filename))

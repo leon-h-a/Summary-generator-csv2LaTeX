@@ -1,7 +1,6 @@
 import unittest
 from csv2latex.utils import csv
 from pathlib import Path
-import os
 
 
 class TestCsv(unittest.TestCase):
