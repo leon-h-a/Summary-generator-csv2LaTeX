@@ -20,13 +20,12 @@ def insert_h1(doc, textblock):
 
 
 def insert_paragraph(doc, textblock):
-    doc.append("(" + textblock.page + ") - ")
-    doc.append(textblock.text)
+    doc.append("(" + textblock.page + ") - " + textblock.text)
     doc.append(NewLine())
     doc.append(NewLine())
 
 
-def tex_dir_exists(path, filename):
+def tex_file_exists(path, filename):
     if (path / filename).exists():
         return True
 

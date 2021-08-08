@@ -9,12 +9,14 @@ logging.basicConfig(level=logging.INFO,
 
 class Converter:
     def __init__(self,
-                 tex_path,
+                 input_folder,
+                 output_folder,
                  latex_author,
                  bash_aliases,
                  ):
 
         # csv
+        self.input_folder = input_folder
         self.csv_filepath = None
         self.csv_filename = None
         self.csv_text_blocks = list()
@@ -22,7 +24,7 @@ class Converter:
         # LaTeX
         self.latex_doc = None
         self.latex_author = latex_author
-        self.tex_path = tex_path
+        self.output_folder = output_folder
 
         # bash
         self.bash_aliases = bash_aliases
@@ -38,11 +40,10 @@ class Converter:
         self.generate_tex_file()
         if self.bash_aliases["alias"] is not None:
             self.add_bash_alias()
-            pass
 
     def locate_csv(self):
-        self.csv_filepath = csv.get_csv_filepath()
-        self.csv_filename = csv.get_csv_filename(self.csv_filepath)
+        self.csv_filepath = csv.get_csv_file(self.input_folder)
+        self.csv_filename = csv.get_csv_excaped_filename(self.csv_filepath)
 
         logging.info('FILE PATH = {}'.format(self.csv_filepath))
         logging.info('FILE NAME = {}'.format(self.csv_filename))
@@ -65,12 +66,12 @@ class Converter:
                 latex.insert_paragraph(self.latex_doc, block)
 
     def generate_tex_file(self):
-        if latex.tex_dir_exists(self.tex_path, self.csv_filename):
-            logging.warning("Tex file directory ({}) already exists. The files inside will not be overwritten.".format(self.tex_path / self.csv_filename))
+        if latex.tex_file_exists(self.output_folder, self.csv_filename):
+            logging.warning("Tex file directory ({}) already exists. The files inside will not be overwritten.".format(self.output_folder / self.csv_filename))
         else:
-            latex.generate_tex_file(self.latex_doc, self.tex_path, self.csv_filename)
+            latex.generate_tex_file(self.latex_doc, self.output_folder, self.csv_filename)
             logging.info('TEX FILE GENERATED')
 
     def add_bash_alias(self):
-        bash.add_bash_alias(self.bash_aliases["alias_path"], self.bash_aliases["alias"], self.tex_path, self.csv_filename)
+        bash.add_bash_alias(self.bash_aliases["alias_path"], self.bash_aliases["alias"], self.output_folder, self.csv_filename)
         logging.info("BASH ALIAS '{}' ADDED".format(self.bash_aliases["alias"]))

@@ -1,3 +1,4 @@
+import logging
 import os
 import re
 import csv
@@ -5,9 +6,9 @@ from pathlib import Path
 from csv2latex.models.textBlock import TextBlock
 
 
-def get_csv_filepath():
+def get_csv_file(path):
     csv_files = list()
-    all_files = os.listdir(Path("input_file"))
+    all_files = os.listdir(path)
 
     for file in all_files:
         if ".csv" in file:
@@ -19,18 +20,17 @@ def get_csv_filepath():
         raise ValueError("There is more than one .csv file inside this directory. Leave only one .csv file!")
 
     elif len(csv_files) == 0:
-        raise ValueError("There are no .csv files inside current directory.")
+        raise ValueError("There are no .csv files inside the 'input_file' directory.")
 
     else:
-        return Path.cwd() / "input_file" / csv_files[0]
+        return Path(path) / csv_files[0]
 
 
-def get_csv_filename(filepath):
+def get_csv_excaped_filename(filepath):
     matches = re.search("([a-zA-Z0-9\_\.\-\+\ ]+).csv$", str(filepath))
-    return matches.group(1)
+    return matches.group(1).replace(" ", " ")
 
 
-# todo: test this!
 def _create_text_box(block):
     if len(block) <= 2:
         block.append("paragraph")

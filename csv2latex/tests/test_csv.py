@@ -5,23 +5,26 @@ from pathlib import Path
 
 class TestCsv(unittest.TestCase):
 
-    def test_get_csv_filepath(self):
-        path = csv.get_csv_filepath()
-        self.assertEqual(path, (Path.cwd() / "file.csv").as_uri())
+    def get_csv_file(self):
+        filepath = csv.get_csv_file(".")
+        self.assertEqual(str(filepath), str(Path("testfile.csv")))
 
         """
-            Add another <filename>.csv file to this dir to test the exception raising
+            Add another <filename>.csv file to './input_file' dir to test the exception raising
         or
-            Remove all <filename>.csv files to this dir to test the exception raising
+            Remove all <filename>.csv files to './input_file' dir to test the exception raising
+        
+        with self.assertRaises(ValueError):
+            csv.get_csv_filepath()
         """
-        # with self.assertRaises(ValueError):
-        #     csv.get_csv_filepath()
 
     def test_get_csv_filename(self):
-        filepath = "somePath\\somefile.csv"
+        filepath = "someDrive/somePath/somsefile.csv"
 
-        filename = csv.get_csv_filename(filepath)
-        self.assertEqual(filename, "somefile")
+        filename = csv.get_csv_excaped_filename(filepath)
+        self.assertEqual(filename, "somsefile")
+
+    # todo: test "csv._remove_newlines"
 
 
 if __name__ == "__main__":

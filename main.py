@@ -1,24 +1,21 @@
 from csv2latex.coverter import Converter
 from pathlib import Path
 
-# The script creates a folder named the same as the input filename at the end of the defined path below
-output_filepath = Path("C:/Users/Leon.hergesic.adamov/OneDrive/Dokumenti/knjige/skripte")
+input_folder = ""
+output_folder = Path("")
 
-# If the alias name is left empty, the bash alias will not be created
-bash_aliases_path = "C:/Users/Leon.hergesic.adamov/AppData/Local/Packages/CanonicalGroupLimited" \
-                    ".UbuntuonWindows_79rhkp1fndgsc/LocalState/rootfs/home "
-alias_name = "tewss"
+# If the alias name is left as None, the bash alias will not be created
+bash_aliases_path = ""
+alias_name = ""
 
-# The script can automatically add .tex file alias to the .bash_aliases.
-# In that case, the <output_filepath> is the same path that the alias will be linked to
-# If you do not want to use this feature, set "alias" to None.
 bash_aliases = {
     "alias_path": bash_aliases_path,
     "alias": alias_name
 }
 
 conv = Converter(
-    tex_path=output_filepath,
+    input_folder=input_folder,
+    output_folder=output_folder,
     bash_aliases=bash_aliases,
-    latex_author="Leon"
+    latex_author="Author"
 )
