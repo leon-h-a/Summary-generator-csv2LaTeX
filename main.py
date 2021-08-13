@@ -17,5 +17,5 @@ conv = Converter(
     input_folder=input_folder,
     output_folder=output_folder,
     bash_aliases=bash_aliases,
-    latex_author="Author"
+    latex_author=""
 )

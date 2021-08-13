@@ -1,4 +1,3 @@
-import logging
 import os
 import re
 import csv
@@ -47,7 +46,7 @@ def parse_csv(filepath):
     list_of_block_objects = list()
 
     with open(str(filepath)) as csvfile:
-        filtered = (line.replace('\r', '') for line in csvfile)
+        filtered = (line.replace('\r', '') for line in csvfile) and (line.replace('\r', '') for line in csvfile)
         highlighted_blocks = csv.reader(filtered, delimiter=",")
         for block in highlighted_blocks:
             list_of_block_objects.append(

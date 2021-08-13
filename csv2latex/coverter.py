@@ -59,11 +59,17 @@ class Converter:
         latex.create_titlepage(self.latex_doc, title=self.csv_filename, author=self.latex_author)
 
     def populate_latex_document(self):
-        for block in self.csv_text_blocks:
+        for index, block in enumerate(self.csv_text_blocks):
             if block.style == "H1":
                 latex.insert_h1(self.latex_doc, block)
             else:
-                latex.insert_paragraph(self.latex_doc, block)
+                try:
+                    if self.csv_text_blocks[index+1].style == "H1":
+                        latex.insert_paragraph(self.latex_doc, block, newline=False)
+                    else:
+                        latex.insert_paragraph(self.latex_doc, block, newline=True)
+                except IndexError:  # Meaning last item in the list
+                    latex.insert_paragraph(self.latex_doc, block, newline=False)
 
     def generate_tex_file(self):
         if latex.tex_file_exists(self.output_folder, self.csv_filename):

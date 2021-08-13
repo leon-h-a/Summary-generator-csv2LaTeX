@@ -1,4 +1,4 @@
-from pylatex import Document, Section, Command, NoEscape, NewPage, HugeText, NewLine
+from pylatex import Document, Section, Command, NoEscape, NewPage, HugeText, VerticalSpace, NewLine
 import os
 
 
@@ -7,6 +7,9 @@ def create_latex_doc():
 
 
 def create_titlepage(doc, title, author):
+    # \usepackage[showframe, margin=1in]{geometry}
+    # \setlength{\parskip}{1em}
+    # \setlength{\perindent}{0ex}
     doc.preamble.append(HugeText(Command('title', title)))
     doc.preamble.append(Command('author', author))
     doc.preamble.append(Command('date', NoEscape(r'\today')))
@@ -19,10 +22,13 @@ def insert_h1(doc, textblock):
         doc.append(' ')
 
 
-def insert_paragraph(doc, textblock):
-    doc.append("(" + textblock.page + ") - " + textblock.text)
-    doc.append(NewLine())
-    doc.append(NewLine())
+def insert_paragraph(doc, textblock, newline):
+    clean_text = textblock.text.replace('\n', ' ').replace('\r', '')
+
+    doc.append('(' + textblock.page + ') - ' + clean_text)
+    if newline:
+        doc.append(VerticalSpace("5mm"))
+        doc.append(NewLine())
 
 
 def tex_file_exists(path, filename):

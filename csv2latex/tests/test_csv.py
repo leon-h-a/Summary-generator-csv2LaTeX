@@ -24,8 +24,6 @@ class TestCsv(unittest.TestCase):
         filename = csv.get_csv_excaped_filename(filepath)
         self.assertEqual(filename, "somsefile")
 
-    # todo: test "csv._remove_newlines"
-
 
 if __name__ == "__main__":
     unittest.main()
