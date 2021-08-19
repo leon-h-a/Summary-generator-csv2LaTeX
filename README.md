@@ -1,4 +1,4 @@
-# csv to LaTeX (highlights extractor)
+# Summary Generator csv2LaTeX
 
 The old option is the usual split-screen with pdf on one and Word on the other side. This option is also followed by the continous copy-paste agony and manual entry of the page the highlight was on. Not to mention other quirks...
 
