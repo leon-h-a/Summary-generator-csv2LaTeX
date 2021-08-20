@@ -1,4 +1,4 @@
-from pylatex import Document, Section, Command, NoEscape, NewPage, HugeText, VerticalSpace, NewLine
+from pylatex import Document, Section, Command, NewPage, HugeText, VerticalSpace, NewLine, NoEscape
 import os
 
 
@@ -7,14 +7,13 @@ def create_latex_doc():
 
 
 def create_titlepage(doc, title, author):
-    # \usepackage[showframe, margin=1in]{geometry}
-    # \setlength{\parskip}{1em}
-    # \setlength{\perindent}{0ex}
     doc.preamble.append(HugeText(Command('title', title)))
     doc.preamble.append(Command('author', author))
     doc.preamble.append(Command('date', NoEscape(r'\today')))
-    doc.append(NoEscape(r'\maketitle'))
+    doc.append(Command("maketitle"))
+    doc.append(Command('thispagestyle', 'empty'))
     doc.append(NewPage())
+    doc.append(Command('pagenumbering', 'arabic'))
 
 
 def insert_h1(doc, textblock):

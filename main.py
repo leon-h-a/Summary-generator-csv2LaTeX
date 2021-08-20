@@ -10,12 +10,12 @@ alias_name = ""
 
 bash_aliases = {
     "alias_path": bash_aliases_path,
-    "alias": alias_name
+    "alias": None
 }
 
 conv = Converter(
     input_folder=input_folder,
     output_folder=output_folder,
     bash_aliases=bash_aliases,
-    latex_author=""
+    latex_author="Author"
 )
